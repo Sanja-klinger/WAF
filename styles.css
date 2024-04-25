@@ -16,7 +16,7 @@
   transform: translate(-50%, -50%);
 }
 
-.dark {
+.light--dark {
   background-color: rgb(164, 33, 33);
   border: 2rem solid;
   color: rgb(28, 159, 50);
@@ -31,4 +31,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.body--dark {
+  background-color: black;
+  transition: background-color 0.5s ease;
 }
