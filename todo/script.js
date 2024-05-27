@@ -1,5 +1,6 @@
 const inputFieldEl = document.querySelector("#inputField");
-const btn = document.querySelector("button");
+
+const btn = document.getElementById("btn");
 const toDoList = document.querySelector("ul");
 
 const state = {
@@ -16,4 +17,31 @@ function render() {
     toDoList.appendChild(li);
   });
 }
+localStorage.getItem("currentTodos");
+function loadTodosFromLocalStorage() {
+  const savedTodos = localStorage.getItem("currentTodos");
+  if (savedTodos) {
+    state.todos = JSON.parse(savedTodos);
+  }
+}
 render();
+
+let currentId = 0;
+
+btn.addEventListener("click", (event) => {
+  const inputField = inputFieldEl.value.trim();
+  /*if (inputField.value === "") {
+    return;*/
+
+  toDoList.innerHTML = "";
+  event.preventDefault();
+  state.todos.push({
+    description: inputField,
+    done: false,
+    id: state.todos.length + 1,
+  });
+  localStorage.setItem("currentTodos", JSON.stringify(state.todos));
+  render();
+
+  inputFieldEl.value = "";
+});
