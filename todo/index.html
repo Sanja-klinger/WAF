@@ -9,17 +9,13 @@
 </head>
 
 <body>
-    <form>
+    <form id="todoForm">
+        <label for="inputField">New Todo:</label>
         <input type="text" id="inputField">
-        <button id="btn">Add Todo</button>
-        <ul>
-
-
-        </ul>
-
-
+        <button id="btn" type="submit">Add Todo</button>
+        <ul id="todoList"></ul>
+        <button id="doneBtn" type="button">Remove done todos</button>
     </form>
-
     <script src="script.js"></script>
 </body>
 
