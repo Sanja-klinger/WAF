@@ -73,5 +73,13 @@ doneBtn.addEventListener("click", (event) => {
   render();
 });
 
+// Add event listeners to radio buttons for filtering
+document.querySelectorAll('input[name="tasks"]').forEach((radio) => {
+  radio.addEventListener("change", (event) => {
+    state.filter = event.target.value;
+    render();
+  });
+});
+
 loadTodosFromLocalStorage();
 render();
