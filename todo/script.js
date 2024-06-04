@@ -10,7 +10,6 @@ const state = {
 function render() {
   // Clear the current list
   toDoList.innerHTML = "";
-
   state.todos.forEach((notes) => {
     const li = document.createElement("li");
 
@@ -50,22 +49,30 @@ function loadTodosFromLocalStorage() {
 
 document.getElementById("todoForm").addEventListener("submit", (event) => {
   event.preventDefault(); // Prevent form submission
-
+  // Filter duplicates
   const inputField = inputFieldEl.value.trim();
-  if (inputField !== "") {
-    state.todos.push({
-      description: inputField,
-      done: false,
-      id: state.todos.length + 1,
-    });
-    saveTodosToLocalStorage();
-    render();
-    inputFieldEl.value = "";
-  }
+  const found = state.todos.find(
+    (element) => element.description === inputField
+  );
+  console.log(found);
+
+  if (inputField == "" || found !== undefined) return;
+
+  state.todos.push({
+    description: inputField,
+    done: false,
+    id: Math.random() * Date.now(),
+  });
+
+  saveTodosToLocalStorage();
+  render();
+  inputFieldEl.value = "";
 });
 
 doneBtn.addEventListener("click", (event) => {
   event.preventDefault(); // Prevent form submission
+
+  //todos = [...newSet(todos)]; wrong approach
 
   // Filter out the completed todos
   state.todos = state.todos.filter((notes) => !notes.done);
