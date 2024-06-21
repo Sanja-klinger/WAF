@@ -15,7 +15,7 @@ function render() {
   // Clear the current list, so we don't have the previous list repeated
   toDoList.innerHTML = "";
 
-  // Filter todos based on the current filter state: if 'all' return function, if done return done, if open return all NOT done
+  // When a radio button (down below) is selected, the state.filter is updated to the selected value ('All', 'Done', or 'Open'), render the filtered
   const filteredTodos = state.todos.filter((notes) => {
     if (state.filter === "All") return true;
     if (state.filter === "Done") return notes.done;
