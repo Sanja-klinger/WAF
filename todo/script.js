@@ -24,25 +24,25 @@ function render() {
     if (state.filter === "Open") return !notes.done;
   });
 
-  filteredTodos.forEach((notes) => {
+  filteredTodos.forEach((note) => {
     const li = document.createElement("li");
 
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
-    checkBox.checked = notes.done;
+    checkBox.checked = note.done;
     //Ensuring that each checkbox has a unique id, which is important for accessibility, as well as for label element`s for attribute
-    checkBox.id = `checkbox-${notes.id}`;
+    checkBox.id = `checkbox-${note.id}`;
 
     const label = document.createElement("label");
     label.htmlFor = checkBox.id;
-    label.textContent = notes.description;
+    label.textContent = note.description;
 
     li.appendChild(checkBox);
     li.appendChild(label);
     toDoList.appendChild(li);
 
     checkBox.addEventListener("change", () => {
-      notes.done = !notes.done;
+      note.done = !note.done;
       saveTodosToLocalStorage();
       render(); // Re-render to reflect changes
     });
@@ -64,9 +64,9 @@ function loadTodosFromLocalStorage() {
     state.todos = JSON.parse(savedTodos);
   }
 }
-
+// Prevent reload
 document.getElementById("todoForm").addEventListener("submit", (event) => {
-  event.preventDefault(); // Prevent reload
+  event.preventDefault();
 
   // Filter duplicates
   const inputField = inputFieldEl.value.trim();
